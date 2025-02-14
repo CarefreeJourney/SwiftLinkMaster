@@ -5,7 +5,7 @@ import com.lucky.SwiftLinkMaster.admin.common.convention.errorcode.IErrorCode;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 21:17
- * @Description: TODO
+ * @Description: 用户错误码枚举
  * @Position: com.lucky.SwiftLinkMaster.admin.common.enums
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
