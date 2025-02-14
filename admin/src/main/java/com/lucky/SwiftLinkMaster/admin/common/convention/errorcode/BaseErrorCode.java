@@ -3,13 +3,10 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.errorcode;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 21:15
- * @Description: TODO
+ * @Description: 基础错误码定义
  * @Position: com.lucky.SwiftLinkMaster.admin.common.convention.errorcode
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
- */
-/**
- * 基础错误码定义
  */
 public enum BaseErrorCode implements IErrorCode {
 

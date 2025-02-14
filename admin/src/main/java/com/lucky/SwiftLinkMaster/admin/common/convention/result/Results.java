@@ -3,7 +3,7 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.result;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 22:04
- * @Description: TODO
+ * @Description: 全局返回对象构造器
  * @Position: com.lucky.SwiftLinkMaster.admin.common.convention.result
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
@@ -14,9 +14,7 @@ import com.lucky.SwiftLinkMaster.admin.common.convention.exception.AbstractExcep
 
 import java.util.Optional;
 
-/**
- * 全局返回对象构造器
- */
+
 public final class Results {
 
     /**

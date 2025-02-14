@@ -3,7 +3,7 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.exception;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 22:09
- * @Description: TODO
+ * @Description: 客户端异常
  * @Position: com.lucky.SwiftLinkMaster.admin.common.convention.exception
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
@@ -12,9 +12,6 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.exception;
 import com.lucky.SwiftLinkMaster.admin.common.convention.errorcode.BaseErrorCode;
 import com.lucky.SwiftLinkMaster.admin.common.convention.errorcode.IErrorCode;
 
-/**
- * 客户端异常
- */
 public class ClientException extends AbstractException {
 
     public ClientException(IErrorCode errorCode) {

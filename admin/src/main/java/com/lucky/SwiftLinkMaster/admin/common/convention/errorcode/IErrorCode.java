@@ -3,14 +3,12 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.errorcode;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 21:15
- * @Description: TODO
+ * @Description: 平台错误码
  * @Position: com.lucky.SwiftLinkMaster.admin.common.convention.errorcode
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
  */
-/**
- * 平台错误码
- */
+
 public interface IErrorCode {
 
     /**

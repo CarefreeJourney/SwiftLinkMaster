@@ -3,7 +3,7 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.exception;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 22:08
- * @Description: TODO
+ * @Description: 抽象项目中三类异常体系，客户端异常、服务端异常以及远程服务调用异常
  * @Position: com.lucky.SwiftLinkMaster.admin.common.convention.exception
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
@@ -16,8 +16,6 @@ import org.springframework.util.StringUtils;
 import java.util.Optional;
 
 /**
- * 抽象项目中三类异常体系，客户端异常、服务端异常以及远程服务调用异常
- *
  * @see ClientException
  * @see ServiceException
  * @see RemoteException

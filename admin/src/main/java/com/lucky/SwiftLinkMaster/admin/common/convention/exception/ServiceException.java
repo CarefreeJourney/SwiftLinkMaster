@@ -3,7 +3,7 @@ package com.lucky.SwiftLinkMaster.admin.common.convention.exception;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/13 22:10
- * @Description: TODO
+ * @Description: 服务端异常
  * @Position: com.lucky.SwiftLinkMaster.admin.common.convention.exception
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
@@ -14,9 +14,7 @@ import com.lucky.SwiftLinkMaster.admin.common.convention.errorcode.IErrorCode;
 
 import java.util.Optional;
 
-/**
- * 服务端异常
- */
+
 public class ServiceException extends AbstractException {
 
     public ServiceException(String message) {
