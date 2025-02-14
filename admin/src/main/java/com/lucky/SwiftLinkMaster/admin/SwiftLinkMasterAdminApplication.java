@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/11 13:09
- * @Description: TODO
+ * @Description: 后台管理启动
  * @Position: com.lucky.SwiftLinkMaster.admin
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
