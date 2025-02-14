@@ -1,0 +1,4 @@
+*.class
+.idea/dataSources/*
+.idea/dataSources.local.xml
+admin/target/classes
