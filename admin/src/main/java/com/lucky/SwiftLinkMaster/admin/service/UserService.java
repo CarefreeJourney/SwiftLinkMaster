@@ -2,6 +2,7 @@ package com.lucky.SwiftLinkMaster.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.UserDO;
+import com.lucky.SwiftLinkMaster.admin.dto.req.UserRegisterReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.UserRespDTO;
 
 /**
@@ -18,6 +19,18 @@ public interface UserService extends IService<UserDO> {
      * @param username
      * @return
      */
-
     UserRespDTO getUserByUsername(String username);
+
+    /**
+     * 查询用户名是否存在
+     * @param username 用户名
+     * @return 用户名存在返回 False，与后续注册时的 if 搭配，不存在返回 True
+     */
+    boolean hasUsername(String username);
+
+    /**
+     * 注册用户
+     * @param requestParam 注册用户请求参数
+     */
+    void register(UserRegisterReqDTO requestParam);
 }
