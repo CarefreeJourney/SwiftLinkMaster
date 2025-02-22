@@ -3,8 +3,11 @@ package com.lucky.SwiftLinkMaster.admin.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.lucky.SwiftLinkMaster.admin.common.convention.result.Result;
 import com.lucky.SwiftLinkMaster.admin.common.convention.result.Results;
+import com.lucky.SwiftLinkMaster.admin.dto.req.UserLoginReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.req.UserRegisterReqDTO;
+import com.lucky.SwiftLinkMaster.admin.dto.req.UserUpdateReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.UserActualRespDTO;
+import com.lucky.SwiftLinkMaster.admin.dto.resp.UserLoginRespDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.UserRespDTO;
 import com.lucky.SwiftLinkMaster.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -63,5 +66,34 @@ public class UserController {
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam){
         userService.register(requestParam);
         return Results.success();
+    }
+
+    /**
+     * 修改用户
+     * @param requestParam
+     * @return
+     */
+    @PutMapping("/api/SwiftLinkMaster/v1/user")
+    public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam){
+        userService.update(requestParam);
+        return Results.success();
+    }
+
+    /**
+     * 用户登录
+     * @param requestParam
+     * @return
+     */
+    @PostMapping("/api/SwiftLinkMaster/v1/login")
+    public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam){
+        return Results.success(userService.login(requestParam));
+    }
+
+    /**
+     * 用户是否登录
+     */
+    @GetMapping("/api/SwiftLinkMaster/v1/user/check-login")
+    public Result<Boolean> checkLogin(@RequestParam("username") String username,@RequestParam("token") String token){
+        return Results.success(userService.checkLogin(username,token));
     }
 }
