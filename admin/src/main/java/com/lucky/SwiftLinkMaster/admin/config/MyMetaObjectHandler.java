@@ -11,7 +11,7 @@ import java.util.Date;
 /**
  * @Author: lcl
  * @CreateTime: 2025/2/15 11:22
- * @Description: TODO
+ * @Description: 创建时间和更新时间自动填充
  * @Position: com.lucky.SwiftLinkMaster.admin.config
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
