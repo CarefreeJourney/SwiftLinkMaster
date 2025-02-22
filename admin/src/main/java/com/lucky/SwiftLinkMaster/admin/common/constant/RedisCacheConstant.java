@@ -10,4 +10,5 @@ package com.lucky.SwiftLinkMaster.admin.common.constant;
  */
 public class RedisCacheConstant {
     public static final String LOCK_USER_REGISTER_KEY = "SwiftLinkMaster:lock_user_register:";
+    public static final String USER_LOGIN = "login_";
 }
