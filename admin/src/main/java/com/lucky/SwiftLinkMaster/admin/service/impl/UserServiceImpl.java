@@ -63,8 +63,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
             throw new ClientException(UserErrorCodeEnum.USER_NAME_EXIST);
         }
         RLock lock = redissonClient.getLock(LOCK_USER_REGISTER_KEY+requestParam.getUsername());
-        try {
-            if (lock.tryLock()){ // 尝试获取锁，成功则进行数据库和缓存的插入
+        if (lock.tryLock()){ // 尝试获取锁，成功则进行数据库和缓存的插入
+            try {
                 // 2. 用户名不存在，则将新用户存入数据库中
                 int inserted = baseMapper.insert(BeanUtil.toBean(requestParam, UserDO.class));
                 // 3. 判断插入是否成功
@@ -72,12 +72,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
                     throw new ClientException(UserErrorCodeEnum.USER_SAVE_ERROR);
                 }
                 userRegisterCachePenetrationBloomFilter.add(requestParam.getUsername());
-            }else {
-                // 否则抛出用户名已存在的失败信息
-                throw new ClientException(UserErrorCodeEnum.USER_SAVE_ERROR);
+            }finally {
+                lock.unlock();
             }
-        }finally {
-            lock.unlock();
+        }else {
+            // 否则抛出用户记录新增失败的信息
+            throw new ClientException(UserErrorCodeEnum.USER_SAVE_ERROR);
         }
     }
 }
