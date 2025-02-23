@@ -2,6 +2,9 @@ package com.lucky.SwiftLinkMaster.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
+import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
+
+import java.util.List;
 
 /**
  * @Author: lcl
@@ -13,4 +16,10 @@ import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
  */
 public interface GroupService extends IService<GroupDO> {
     void saveGroup(String groupName);
+
+    /**
+     * 查询用户短链接分组集合
+     * @return
+     */
+    List<GroupResponseDTO> listGroup();
 }

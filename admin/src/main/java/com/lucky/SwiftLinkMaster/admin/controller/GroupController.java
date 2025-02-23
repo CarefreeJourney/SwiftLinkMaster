@@ -3,11 +3,12 @@ package com.lucky.SwiftLinkMaster.admin.controller;
 import com.lucky.SwiftLinkMaster.admin.common.convention.result.Result;
 import com.lucky.SwiftLinkMaster.admin.common.convention.result.Results;
 import com.lucky.SwiftLinkMaster.admin.dto.req.GroupSaveReqDTO;
+import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
 import com.lucky.SwiftLinkMaster.admin.service.GroupService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Author: lcl
@@ -25,5 +26,9 @@ public class GroupController {
     public Result<Void> save(@RequestBody GroupSaveReqDTO requestParam){
         groupService.saveGroup(requestParam.getName());
         return Results.success();
+    }
+    @GetMapping("/api/SwiftLinkMaster/v1/group")
+    public Result<List<GroupResponseDTO>> listGroup(){
+        return Results.success(groupService.listGroup());
     }
 }

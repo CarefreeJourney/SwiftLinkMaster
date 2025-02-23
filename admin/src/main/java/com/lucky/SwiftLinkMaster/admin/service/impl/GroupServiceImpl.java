@@ -1,12 +1,18 @@
 package com.lucky.SwiftLinkMaster.admin.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
 import com.lucky.SwiftLinkMaster.admin.dao.mapper.GroupMapper;
+import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
 import com.lucky.SwiftLinkMaster.admin.service.GroupService;
 import com.lucky.SwiftLinkMaster.admin.toolkit.RandomGenerator;
 import groovy.util.logging.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Author: lcl
@@ -32,9 +38,22 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         } while (!hasGid(gid));
         GroupDO groupDO = GroupDO.builder()
                 .gid(gid)
+                .sortOrder(0)
                 .name(groupName)
                 .build();
         baseMapper.insert(groupDO);
+    }
+
+    @Override
+    public List<GroupResponseDTO> listGroup() {
+        // TODO 获取用户名
+        // 根据用户名获取存在的对应的已经创建的短链接组并按照排序优先级和更新时间倒序排序
+        LambdaQueryWrapper<GroupDO> groupDOLambdaQueryWrapper = Wrappers.lambdaQuery(GroupDO.class)
+                .eq(GroupDO::getDelFlag, 0)
+                .eq(GroupDO::getUsername, "lcl")
+                .orderByDesc(GroupDO::getSortOrder, GroupDO::getUpdateTime);
+        List<GroupDO> groupDOList = baseMapper.selectList(groupDOLambdaQueryWrapper);
+        return BeanUtil.copyToList(groupDOList,GroupResponseDTO.class);
     }
 
     /**
