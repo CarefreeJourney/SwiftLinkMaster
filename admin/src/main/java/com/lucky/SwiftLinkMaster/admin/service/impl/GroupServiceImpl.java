@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.lucky.SwiftLinkMaster.admin.common.biz.user.UserContext;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
 import com.lucky.SwiftLinkMaster.admin.dao.mapper.GroupMapper;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
@@ -39,6 +40,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         GroupDO groupDO = GroupDO.builder()
                 .gid(gid)
                 .sortOrder(0)
+                .username(UserContext.getUsername())
                 .name(groupName)
                 .build();
         baseMapper.insert(groupDO);
@@ -46,11 +48,11 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
 
     @Override
     public List<GroupResponseDTO> listGroup() {
-        // TODO 获取用户名
         // 根据用户名获取存在的对应的已经创建的短链接组并按照排序优先级和更新时间倒序排序
         LambdaQueryWrapper<GroupDO> groupDOLambdaQueryWrapper = Wrappers.lambdaQuery(GroupDO.class)
                 .eq(GroupDO::getDelFlag, 0)
-                .eq(GroupDO::getUsername, "lcl")
+                // TODO 获取用户名
+                .eq(GroupDO::getUsername, UserContext.getUsername())
                 .orderByDesc(GroupDO::getSortOrder, GroupDO::getUpdateTime);
         List<GroupDO> groupDOList = baseMapper.selectList(groupDOLambdaQueryWrapper);
         return BeanUtil.copyToList(groupDOList,GroupResponseDTO.class);
@@ -64,7 +66,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         // 保证 gid和用户名 不重复，且是可用的，即是唯一索引，查询数据库不存在
         GroupDO hasGroupFlag = lambdaQuery().eq(GroupDO::getGid, gid)
                 // TODO 设置用户名,不能通过用户名去传 username，否则会被调用接口刷，而是通过网关
-                .eq(GroupDO::getUsername,null)
+                .eq(GroupDO::getUsername,UserContext.getUsername())
                 .one();
         return hasGroupFlag == null;
     }
