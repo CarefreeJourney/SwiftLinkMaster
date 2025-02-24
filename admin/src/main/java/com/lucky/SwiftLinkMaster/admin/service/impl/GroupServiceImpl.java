@@ -2,11 +2,13 @@ package com.lucky.SwiftLinkMaster.admin.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.lucky.SwiftLinkMaster.admin.common.biz.user.UserContext;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
 import com.lucky.SwiftLinkMaster.admin.dao.mapper.GroupMapper;
+import com.lucky.SwiftLinkMaster.admin.dto.req.GroupUpdateReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
 import com.lucky.SwiftLinkMaster.admin.service.GroupService;
 import com.lucky.SwiftLinkMaster.admin.toolkit.RandomGenerator;
@@ -36,7 +38,7 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         String gid ;
         do {
             gid = RandomGenerator.generateRandom();
-        } while (!hasGid(gid));
+        } while (!hasGid(gid)); // 不符合就继续生成
         GroupDO groupDO = GroupDO.builder()
                 .gid(gid)
                 .sortOrder(0)
@@ -58,8 +60,20 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         return BeanUtil.copyToList(groupDOList,GroupResponseDTO.class);
     }
 
+    @Override
+    public void updateGroup(GroupUpdateReqDTO requestParam) {
+        LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                .eq(GroupDO::getGid, requestParam.getGid())
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getDelFlag, 0);
+        GroupDO groupDO = new GroupDO();
+        groupDO.setName(requestParam.getName());
+        baseMapper.update(groupDO,updateWrapper); // 根据用户名称和Gid和软删除，修改其分组名称为 groupDO 的分组名称
+
+    }
+
     /**
-     * 返回 True 说明是不存在的
+     * 返回 True 说明是不存在的，符合条件，而不符合条件则返回 False
      * @return
      */
     private boolean hasGid(String gid) {
