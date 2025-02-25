@@ -4,6 +4,7 @@ import com.lucky.SwiftLinkMaster.admin.common.convention.result.Result;
 import com.lucky.SwiftLinkMaster.admin.common.convention.result.Results;
 import com.lucky.SwiftLinkMaster.admin.dto.req.GroupSaveReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.req.GroupUpdateReqDTO;
+import com.lucky.SwiftLinkMaster.admin.dto.req.ShortLinkGroupSortReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
 import com.lucky.SwiftLinkMaster.admin.service.GroupService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class GroupController {
      * @param requestParam
      * @return
      */
-    @PostMapping("/api/SwiftLinkMaster/v1/group")
+    @PostMapping("/api/SwiftLinkMaster/admin/v1/group")
     public Result<Void> save(@RequestBody GroupSaveReqDTO requestParam){
         groupService.saveGroup(requestParam.getName());
         return Results.success();
@@ -39,19 +40,41 @@ public class GroupController {
      * 根据用户上下文返回短链接分组列表
      * @return
      */
-    @GetMapping("/api/SwiftLinkMaster/v1/group")
+    @GetMapping("/api/SwiftLinkMaster/admin/v1/group")
     public Result<List<GroupResponseDTO>> listGroup(){
         return Results.success(groupService.listGroup());
     }
 
     /**
-     * 根据短链接分组gid和用户上下文和分组名称，修改短链接的名称
+     * 根据短链接分组gid和用户上下文和分组名称，修改短链接分组的名称
      * @param requestParam
      * @return
      */
-    @PutMapping("/api/SwiftLinkMaster/v1/group")
+    @PutMapping("/api/SwiftLinkMaster/admin/v1/group")
     public Result<Void> updateGroup(@RequestBody GroupUpdateReqDTO requestParam){
         groupService.updateGroup(requestParam);
+        return Results.success();
+    }
+
+    /**
+     * 删除短链接分组
+     * @param gid
+     * @return
+     */
+    @DeleteMapping("/api/SwiftLinkMaster/admin/v1/group")
+    public Result<Void> updateGroup(@RequestParam String gid){
+        groupService.deleteGroup(gid);
+        return Results.success();
+    }
+
+    /**
+     * 短链接分组排序
+     * @param
+     * @return
+     */
+    @PostMapping("/api/SwiftLinkMaster/admin/v1/group/sort")
+    public Result<Void> sortGroup(@RequestBody List<ShortLinkGroupSortReqDTO> reqparam){
+        groupService.sortGroup(reqparam);
         return Results.success();
     }
 }

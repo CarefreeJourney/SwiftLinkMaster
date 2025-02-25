@@ -31,7 +31,7 @@ public class UserController {
      * @param username
      * @return
      */
-    @GetMapping("/api/SwiftLinkMaster/v1/user/{username}")
+    @GetMapping("/api/SwiftLinkMaster/admin/v1/user/{username}")
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username){
         UserRespDTO result = userService.getUserByUsername(username);
         return Results.success(result);
@@ -41,7 +41,7 @@ public class UserController {
      * @param username
      * @return
      */
-    @GetMapping("/api/SwiftLinkMaster/v1/actual/user/{username}")
+    @GetMapping("/api/SwiftLinkMaster/admin/v1/actual/user/{username}")
     public Result<UserActualRespDTO> getActualUserByUsername(@PathVariable("username") String username){
         UserRespDTO result = userService.getUserByUsername(username);
         return Results.success(BeanUtil.toBean(result,UserActualRespDTO.class));
@@ -52,7 +52,7 @@ public class UserController {
      * @param username
      * @return
      */
-    @GetMapping("/api/SwiftLinkMaster/v1/user/has-username")
+    @GetMapping("/api/SwiftLinkMaster/admin/v1/user/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") String username){
         return Results.success(userService.hasUsername(username));
     }
@@ -62,7 +62,7 @@ public class UserController {
      * @param requestParam
      * @return
      */
-    @PostMapping("/api/SwiftLinkMaster/v1/user")
+    @PostMapping("/api/SwiftLinkMaster/admin/v1/user")
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam){
         userService.register(requestParam);
         return Results.success();
@@ -73,7 +73,7 @@ public class UserController {
      * @param requestParam
      * @return
      */
-    @PutMapping("/api/SwiftLinkMaster/v1/user")
+    @PutMapping("/api/SwiftLinkMaster/admin/v1/user")
     public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam){
         userService.update(requestParam);
         return Results.success();
@@ -84,7 +84,7 @@ public class UserController {
      * @param requestParam
      * @return
      */
-    @PostMapping("/api/SwiftLinkMaster/v1/login")
+    @PostMapping("/api/SwiftLinkMaster/admin/v1/login")
     public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam){
         return Results.success(userService.login(requestParam));
     }
@@ -92,7 +92,7 @@ public class UserController {
     /**
      * 用户是否登录
      */
-    @GetMapping("/api/SwiftLinkMaster/v1/user/check-login")
+    @GetMapping("/api/SwiftLinkMaster/admin/v1/user/check-login")
     public Result<Boolean> checkLogin(@RequestParam("username") String username,@RequestParam("token") String token){
         return Results.success(userService.checkLogin(username,token));
     }
@@ -100,7 +100,7 @@ public class UserController {
     /**
      * 用户退出登录
      */
-    @DeleteMapping("/api/SwiftLinkMaster/v1/user/logout")
+    @DeleteMapping("/api/SwiftLinkMaster/admin/v1/user/logout")
     public Result<Void> logout(@RequestParam("username") String username,@RequestParam("token") String token){
         userService.logout(username,token);
         return Results.success();
