@@ -3,6 +3,7 @@ package com.lucky.SwiftLinkMaster.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
 import com.lucky.SwiftLinkMaster.admin.dto.req.GroupUpdateReqDTO;
+import com.lucky.SwiftLinkMaster.admin.dto.req.ShortLinkGroupSortReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
 
 import java.util.List;
@@ -33,4 +34,16 @@ public interface GroupService extends IService<GroupDO> {
      * @param requestParam
      */
     void updateGroup(GroupUpdateReqDTO requestParam);
+
+    /**
+     * 删除短链接分组
+     * @param gid 分组标识
+     */
+    void deleteGroup(String gid);
+
+    /**
+     * 短链接分组排序
+     * @param reqparam
+     */
+    void sortGroup(List<ShortLinkGroupSortReqDTO> reqparam);
 }

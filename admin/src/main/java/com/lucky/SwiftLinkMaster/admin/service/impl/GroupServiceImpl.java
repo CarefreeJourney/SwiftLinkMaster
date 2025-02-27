@@ -9,6 +9,7 @@ import com.lucky.SwiftLinkMaster.admin.common.biz.user.UserContext;
 import com.lucky.SwiftLinkMaster.admin.dao.entity.GroupDO;
 import com.lucky.SwiftLinkMaster.admin.dao.mapper.GroupMapper;
 import com.lucky.SwiftLinkMaster.admin.dto.req.GroupUpdateReqDTO;
+import com.lucky.SwiftLinkMaster.admin.dto.req.ShortLinkGroupSortReqDTO;
 import com.lucky.SwiftLinkMaster.admin.dto.resp.GroupResponseDTO;
 import com.lucky.SwiftLinkMaster.admin.service.GroupService;
 import com.lucky.SwiftLinkMaster.admin.toolkit.RandomGenerator;
@@ -70,6 +71,33 @@ public class GroupServiceImpl extends ServiceImpl<GroupMapper, GroupDO> implemen
         groupDO.setName(requestParam.getName());
         baseMapper.update(groupDO,updateWrapper); // 根据用户名称和Gid和软删除，修改其分组名称为 groupDO 的分组名称
 
+    }
+
+    @Override
+    public void deleteGroup(String gid) {
+        // 使用软删除，update
+        LambdaUpdateWrapper<GroupDO> deleteWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                .eq(GroupDO::getUsername, UserContext.getUsername())
+                .eq(GroupDO::getGid, gid)
+                .eq(GroupDO::getDelFlag, 0);
+        GroupDO groupDO = new GroupDO();
+        groupDO.setDelFlag(1);
+        baseMapper.update(groupDO,deleteWrapper);
+    }
+
+    @Override
+    public void sortGroup(List<ShortLinkGroupSortReqDTO> reqparam) {
+        // 常规，分别进行 n 次数据库连接进行更新
+        reqparam.forEach(each->{
+            GroupDO groupDO = GroupDO.builder()
+                    .sortOrder(each.getSortOrder())
+                    .build();
+            LambdaUpdateWrapper<GroupDO> updateWrapper = Wrappers.lambdaUpdate(GroupDO.class)
+                    .eq(GroupDO::getUsername, UserContext.getUsername())
+                    .eq(GroupDO::getGid, each.getGid())
+                    .eq(GroupDO::getDelFlag, 0);
+            baseMapper.update(groupDO,updateWrapper);
+        });
     }
 
     /**

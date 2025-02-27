@@ -62,7 +62,7 @@ public class GroupController {
      * @return
      */
     @DeleteMapping("/api/SwiftLinkMaster/admin/v1/group")
-    public Result<Void> updateGroup(@RequestParam String gid){
+    public Result<Void> deleteGroup(@RequestParam String gid){
         groupService.deleteGroup(gid);
         return Results.success();
     }
