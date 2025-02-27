@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @MapperScan("com.lucky.SwiftLinkMaster.project.dao.mapper")
 @SpringBootApplication
 public class ShortLinkApplication {
-    public static void main(String[] args){
+        public static void main(String[] args){
         SpringApplication.run(ShortLinkApplication.class,args);
     }
 }
