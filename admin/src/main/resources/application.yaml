@@ -6,7 +6,7 @@ spring:
     # ShardingSphere 对 Driver 自定义，实现分库分表等隐藏逻辑，不再依赖 mysql 的 driver 了
     driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
     # ShardingSphere 配置文件路径
-    url: jdbc:shardingsphere:classpath:shardingsphere-config.yaml
+    url: jdbc:shardingsphere:classpath:shardingsphere-config-${database.env:dev}.yaml # java -jar -Ddatabase.env，若不设置该参数，则默认是 dev
 #    username: root
 #    password: root
 #    url: jdbc:mysql://127.0.0.1:3306/SwiftLinkMaster?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&transformedBitIsBoolean=true&serverTimezone=GMT%2B8
