@@ -1,5 +1,6 @@
 package com.lucky.SwiftLinkMaster.project.controller;
 
+import com.alibaba.fastjson2.JSON;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lucky.SwiftLinkMaster.project.common.convention.result.Result;
 import com.lucky.SwiftLinkMaster.project.common.convention.result.Results;
@@ -30,6 +31,7 @@ public class ShortLinkController {
 
     @PostMapping("/api/SwiftLinkMaster/short-link/v1/create")
     public Result<ShortLinkCreateRespDTO> createShortLink(@RequestBody ShortLinkCreateReqDTO requestParam){
+        String requestString = JSON.toJSONString(requestParam);
         return Results.success(shortLinkService.createShortLink(requestParam));
     }
 
