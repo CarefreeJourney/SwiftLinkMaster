@@ -1,9 +1,12 @@
 package com.lucky.SwiftLinkMaster.project.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.lucky.SwiftLinkMaster.project.dao.entity.ShortLinkDO;
 import com.lucky.SwiftLinkMaster.project.dto.req.ShortLinkCreateReqDTO;
+import com.lucky.SwiftLinkMaster.project.dto.req.ShortLinkPageReqDTO;
 import com.lucky.SwiftLinkMaster.project.dto.resp.ShortLinkCreateRespDTO;
+import com.lucky.SwiftLinkMaster.project.dto.resp.ShortLinkPageRespDTO;
 
 /**
  * @Author: lcl
@@ -21,4 +24,10 @@ public interface ShortLinkService extends IService<ShortLinkDO> {
      */
     ShortLinkCreateRespDTO createShortLink(ShortLinkCreateReqDTO requestParam);
 
+    /**
+     * 分页查询短链接
+     * @param requestParam
+     * @return
+     */
+    IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkPageReqDTO requestParam);
 }

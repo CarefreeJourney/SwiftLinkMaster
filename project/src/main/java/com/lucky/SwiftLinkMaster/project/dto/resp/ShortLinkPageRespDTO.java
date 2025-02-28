@@ -1,4 +1,4 @@
-package com.lucky.SwiftLinkMaster.project.dto.req;
+package com.lucky.SwiftLinkMaster.project.dto.resp;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
@@ -7,18 +7,34 @@ import java.util.Date;
 
 /**
  * @Author: lcl
- * @CreateTime: 2025/2/26 18:56
- * @Description: 短链接创建请求对象
+ * @CreateTime: 2025/2/27 23:54
+ * @Description: 短链接分页返回参数
  * @Position: com.lucky.SwiftLinkMaster.project.dto.req
  * @CurrentVersion: 1.0
  * @VersionHistory: 1.0
  */
 @Data
-public class ShortLinkCreateReqDTO {
+public class ShortLinkPageRespDTO {
+
+    /**
+     * id
+     */
+    private Long id;
+
     /**
      * 域名
      */
     private String domain;
+
+    /**
+     * 短链接
+     */
+    private String shortUri;
+
+    /**
+     * 完整短链接
+     */
+    private String fullShortUrl;
 
     /**
      * 原始链接
@@ -29,11 +45,6 @@ public class ShortLinkCreateReqDTO {
      * 分组标识
      */
     private String gid;
-
-    /**
-     * 创建类型 1：控制台 0：接口
-     */
-    private Integer createdType;
 
     /**
      * 有效期类型 0：永久有效 1：用户自定义
@@ -52,4 +63,8 @@ public class ShortLinkCreateReqDTO {
     @TableField("`describe`")
     private String describe;
 
+    /**
+     * 网站标识
+     */
+    private String favicon;
 }
