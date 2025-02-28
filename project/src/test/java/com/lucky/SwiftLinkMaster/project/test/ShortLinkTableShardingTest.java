@@ -25,6 +25,7 @@ public class ShortLinkTableShardingTest {
             "  `create_time` datetime DEFAULT NULL COMMENT '创建时间',\n" +
             "  `update_time` datetime DEFAULT NULL COMMENT '修改时间',\n" +
             "  `del_flag` tinyint(1) DEFAULT NULL COMMENT '删除标识 0：未删除 1：已删除',\n" +
+            "  `favicon` varchar(256) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL COMMENT '网站图标',\n" +
             "  PRIMARY KEY (`id`),\n" +
             "  UNIQUE KEY `idx_unique_full_short_url` (`full_short_url`) USING BTREE\n" +
             ") ENGINE=InnoDB AUTO_INCREMENT=1895027695156023299 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
