@@ -5,8 +5,11 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.lucky.SwiftLinkMaster.project.dao.entity.ShortLinkDO;
 import com.lucky.SwiftLinkMaster.project.dto.req.ShortLinkCreateReqDTO;
 import com.lucky.SwiftLinkMaster.project.dto.req.ShortLinkPageReqDTO;
+import com.lucky.SwiftLinkMaster.project.dto.resp.ShortLinkCountQueryRespDTO;
 import com.lucky.SwiftLinkMaster.project.dto.resp.ShortLinkCreateRespDTO;
 import com.lucky.SwiftLinkMaster.project.dto.resp.ShortLinkPageRespDTO;
+
+import java.util.List;
 
 /**
  * @Author: lcl
@@ -30,4 +33,11 @@ public interface ShortLinkService extends IService<ShortLinkDO> {
      * @return
      */
     IPage<ShortLinkPageRespDTO> pageShortLink(ShortLinkPageReqDTO requestParam);
+
+    /**
+     * 查询短链接分组内总数量
+     * @param requestParam
+     * @return
+     */
+    List<ShortLinkCountQueryRespDTO> listGroupShortLinkCount(List<String> requestParam);
 }
