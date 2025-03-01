@@ -2,7 +2,7 @@ package com.lucky.SwiftLinkMaster.admin.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.lucky.SwiftLinkMaster.admin.common.convention.result.Result;
-import com.lucky.SwiftLinkMaster.admin.remote.dto.ShortLinkRemoteService;
+import com.lucky.SwiftLinkMaster.admin.remote.ShortLinkRemoteService;
 import com.lucky.SwiftLinkMaster.admin.remote.dto.req.ShortLinkCreateReqDTO;
 import com.lucky.SwiftLinkMaster.admin.remote.dto.req.ShortLinkPageReqDTO;
 import com.lucky.SwiftLinkMaster.admin.remote.dto.resp.ShortLinkCreateRespDTO;

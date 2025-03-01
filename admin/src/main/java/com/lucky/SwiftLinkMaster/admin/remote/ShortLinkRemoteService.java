@@ -1,4 +1,4 @@
-package com.lucky.SwiftLinkMaster.admin.remote.dto;
+package com.lucky.SwiftLinkMaster.admin.remote;
 
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;

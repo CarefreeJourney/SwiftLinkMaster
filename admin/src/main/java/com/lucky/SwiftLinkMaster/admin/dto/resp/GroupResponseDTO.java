@@ -27,4 +27,9 @@ public class GroupResponseDTO {
      * 分组排序
      */
     private Integer sortOrder;
+
+    /**
+     * 组中下的短链接数
+     */
+    private Integer shortLinkGroup;
 }
